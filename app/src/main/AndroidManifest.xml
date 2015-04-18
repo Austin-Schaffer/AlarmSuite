@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="aschaffer.alarmsuite" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddAlarmMenu"
+            android:label="@string/title_activity_add_alarm_menu" >
+        </activity>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:label="@string/title_activity_alarm_receiver" >
+            <intent-filter>
+                <action android:name="aschaffer.alarmsuite.ALARM_SCREEN" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Alarm"
+            android:label="@string/title_activity_alarm" >
+            <intent-filter>
+                <action android:name="aschaffer.alarmsuite.AlarmScreen" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AlarmScreen"
+            android:label="@string/title_activity_alarm_screen" >
+        </activity>
+
+        <provider
+            android:name=".DatabaseProvider"
+            android:authorities="aschaffer.alarmsuite"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
+    </application>
+
+</manifest>
