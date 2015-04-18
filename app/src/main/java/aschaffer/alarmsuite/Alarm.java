@@ -83,7 +83,6 @@ public final class Alarm implements Parcelable{
                 return tempTime.longValue();
             default:
                 return null;
-
         }
     }
 
