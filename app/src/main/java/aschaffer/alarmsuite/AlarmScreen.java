@@ -22,6 +22,8 @@ public class AlarmScreen extends Activity {
 
         TextView message = (TextView) findViewById(R.id.message);
         message.setText((String) mAlarm.getValue(Ref.message));
+        
+
     }
 
 

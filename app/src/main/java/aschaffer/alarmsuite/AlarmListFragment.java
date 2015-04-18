@@ -2,15 +2,18 @@ package aschaffer.alarmsuite;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -23,16 +26,7 @@ import android.widget.TextView;
  */
 public class AlarmListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private List alarmListItemList;
 
     /**
      * The fragment's ListView/GridView.
@@ -49,8 +43,6 @@ public class AlarmListFragment extends Fragment implements AbsListView.OnItemCli
     public static AlarmListFragment newInstance(String param1, String param2) {
         AlarmListFragment fragment = new AlarmListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -66,14 +58,11 @@ public class AlarmListFragment extends Fragment implements AbsListView.OnItemCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        // TODO: Change Adapter to display your content
-        //mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-        //        android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        alarmListItemList = new ArrayList();
+        alarmListItemList.add(new AlarmListItem("Example 1"));
+        alarmListItemList.add(new AlarmListItem("Example 2"));
+        alarmListItemList.add(new AlarmListItem("Example 3"));
+        mAdapter = new AlarmListAdapter(getActivity(), alarmListItemList);
     }
 
     @Override
@@ -95,7 +84,6 @@ public class AlarmListFragment extends Fragment implements AbsListView.OnItemCli
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -105,17 +93,14 @@ public class AlarmListFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-        }
+        AlarmListItem item = (AlarmListItem) alarmListItemList.get(position);
+        Toast.makeText(getActivity(), item.getItemTitle() + " Clicked!"
+                , Toast.LENGTH_SHORT).show();
     }
 
     /**

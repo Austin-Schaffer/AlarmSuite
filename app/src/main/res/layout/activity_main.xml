@@ -43,9 +43,15 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/relativeAlarmLayout"
         android:layout_centerHorizontal="true"
-        android:id="@+id/alarmList"
+        android:id="@+id/alarmListLayout"
         android:weightSum="1">
 
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/fragment_alarmlist_list"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/alarmList" />
     </LinearLayout>
 
 </RelativeLayout>
